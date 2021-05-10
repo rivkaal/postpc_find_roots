@@ -4,13 +4,13 @@ An Android exercise for developers teaching how to play around with intents, act
 
 ## To fulfill this exercise:
 
-> take a loot at file `CalculateRootsService.java`
+> take a look at file `CalculateRootsService.java`
 
 This service accepts an intent with a number to find roots for.
 You should calculate the roots until either roots found, understood that the number is prime, or 20 seconds passed.
 You should send a broadcast from this service.
 
-> take a loot at file `MainActivity.java`
+> take a look at file `MainActivity.java`
 
 The MainActivity has UI to let the user input a number and start the service.
 The **UI flow specs** are detailed in the file `MainActivity.java` and contain relevant specs for:
@@ -33,13 +33,13 @@ If you're unsure how to do this, google search "android create new activity" and
 
 ## Tests:
 
-> take a loot at file `CalculateRootsServiceTest.java`
+> take a look at file `CalculateRootsServiceTest.java`
 
 There is a single test there that validates good behavior of the `CalculateRootsService` when it needs to calculate roots for the input 15
 Make sure you read and understand this test.
 Run the test and make sure you it passes.
 
-> take a loot at file `MainActivityTest.java`
+> take a look at file `MainActivityTest.java`
 
 There are some tests already written there.
 Make sure you read and understand the existing tests.
