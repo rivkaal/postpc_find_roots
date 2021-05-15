@@ -45,8 +45,22 @@ public class MainActivityTest extends TestCase {
     EditText inputEditText = mainActivity.findViewById(R.id.editTextInputNumber);
     Button button = mainActivity.findViewById(R.id.buttonCalculateRoots);
 
+    inputEditText.setText("55");
+    assertTrue(button.isEnabled());
     // test: insert input to the edit text and verify that the button is enabled
     // TODO: implement
+  }
+
+  @Test
+  public void when_userIsEnteringBadInput_and_noCalculationAlreadyHappned_then_theButtonShouldBeNotEnabled() {
+    // create a MainActivity and let it think it's currently displayed on the screen
+    MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+
+    // find the edit-text and the button
+    EditText inputEditText = mainActivity.findViewById(R.id.editTextInputNumber);
+    Button button = mainActivity.findViewById(R.id.buttonCalculateRoots);
+    inputEditText.setText("abc");
+    assertFalse(button.isEnabled());
   }
 
   // TODO: add 1 or 2 more unit tests to the activity. so your "writing tests" skill won't get rusty.
