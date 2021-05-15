@@ -2,10 +2,16 @@ package exercise.find.roots;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Math.sqrt;
 
 public class CalculateRootsService extends IntentService {
 
+  final long time = 20000;
 
   public CalculateRootsService() {
     super("CalculateRootsService");
@@ -20,6 +26,25 @@ public class CalculateRootsService extends IntentService {
       Log.e("CalculateRootsService", "can't calculate roots for non-positive input" + numberToCalculateRootsFor);
       return;
     }
+    long i = 2;
+    while (i <=numberToCalculateRootsFor/2 && (System.currentTimeMillis()-timeStartMs<time)) {
+      if(numberToCalculateRootsFor%i == 0) {
+        Intent intentToReturn = new Intent();
+        intentToReturn.setAction("found_roots");
+        intentToReturn.putExtra("original_number", numberToCalculateRootsFor);
+        intentToReturn.putExtra("root1", i);
+        intentToReturn.putExtra("root2", numberToCalculateRootsFor/i);
+        sendBroadcast(intentToReturn);
+        return;
+      }
+      ++i;
+    }
+    Intent intentToReturn = new Intent();
+    intentToReturn.setAction("stopped_calculations");
+    intent.putExtra("original_number", numberToCalculateRootsFor);
+    intent.putExtra("time_until_give_up_seconds",
+            TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()-timeStartMs));
+    sendBroadcast(intentToReturn);
     /*
     TODO:
      calculate the roots.
