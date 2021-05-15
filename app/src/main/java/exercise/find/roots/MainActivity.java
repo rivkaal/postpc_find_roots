@@ -94,17 +94,25 @@ public class MainActivity extends AppCompatActivity {
         long num = incomingIntent.getLongExtra("original_number", 0);
         long root1 = incomingIntent.getLongExtra("root1", 0);
         long root2 = incomingIntent.getLongExtra("root2", 0);
-        Intent intentToShowResults = new Intent(context, MainActivity.class);
+        Intent intentToShowResults = new Intent(context, ResultActivity.class);
+        intentToShowResults.setAction("found_roots");
         intentToShowResults.putExtra("original_number", num);
         intentToShowResults.putExtra("root1", root1);
         intentToShowResults.putExtra("root2", root2);
       }
     };
-    registerReceiver(broadcastReceiverForSuccess, new IntentFilter("found_roots"));
+    registerReceiver(broadcastReceiverForAbort, new IntentFilter("stopped_calculations"));
      broadcastReceiverForAbort = new BroadcastReceiver() {
       @Override
       public void onReceive(Context context, Intent intent) {
         if (intent == null || !intent.getAction().equals("stopped_calculations")) return;
+        progressBar.setVisibility(View.GONE);
+        progressBarVisibility = false;
+        long num = intent.getLongExtra("original_number", 0);
+        long time = intent.getLongExtra("time_until_give_up_seconds", 0);
+        Intent intentToShowResults = new Intent(context, ResultActivity.class);
+        intentToShowResults.putExtra("original_number", num);
+        intentToShowResults.putExtra("time_until_give_up_seconds", time);
       }
     };
     /*
