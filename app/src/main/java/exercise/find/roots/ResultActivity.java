@@ -18,6 +18,7 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         TextView textView = findViewById(R.id.result);
+        textView.setVisibility(View.VISIBLE);
         new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent incomingIntent) {

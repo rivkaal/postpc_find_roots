@@ -99,9 +99,10 @@ public class MainActivity extends AppCompatActivity {
         intentToShowResults.putExtra("original_number", num);
         intentToShowResults.putExtra("root1", root1);
         intentToShowResults.putExtra("root2", root2);
+        startActivity(intentToShowResults);
       }
     };
-    registerReceiver(broadcastReceiverForAbort, new IntentFilter("stopped_calculations"));
+    registerReceiver(broadcastReceiverForSuccess, new IntentFilter("found_roots"));
      broadcastReceiverForAbort = new BroadcastReceiver() {
       @Override
       public void onReceive(Context context, Intent intent) {
@@ -113,8 +114,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intentToShowResults = new Intent(context, ResultActivity.class);
         intentToShowResults.putExtra("original_number", num);
         intentToShowResults.putExtra("time_until_give_up_seconds", time);
+        startActivity(intentToShowResults);
       }
     };
+    registerReceiver(broadcastReceiverForAbort, new IntentFilter("stopped_calculations"));
     /*
     todo:
      add a broadcast-receiver to listen for abort-calculating as defined in the spec (below)
