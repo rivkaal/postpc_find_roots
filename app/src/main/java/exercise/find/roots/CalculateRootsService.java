@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.Math.sqrt;
 
 public class CalculateRootsService extends IntentService {
 
